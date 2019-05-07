@@ -1,0 +1,68 @@
+{
+    "title": "Mobility",
+    "description": "Transit API can be used to obtain time-aggregated data representing moving the people between various spatial points within the Czech Republic. Having A - 'from' and B - 'to' points, the API can return count of people traveling from A to B or people that are from A and traveling to B, etc. The mobility data is based on moving mobile stations in O2 mobile network.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/o2.cz/mobility/1.2.0/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://developer.o2.cz/mobility/sandbox/api",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "getInfo": {
+            "main": "./lib/actions/getInfo.js",
+            "title": "Information about versions of application and data.",
+            "description": "",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getInfo.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "transit": {
+            "main": "./lib/actions/transit.js",
+            "title": "Transit between basic residential units",
+            "description": "Get count of objects that were moving between basic residential units or objects that were visiting these basic residential units. Specific object's occurence type in the base residential unit can be requested. If none occurence type is present in the request or both occurence types are zero, the result will be aggregation of all types of occurence for given base residential units. More about base residential units can be found at https://www.czso.cz/csu/rso/zsj_rso (czech).",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/transit.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

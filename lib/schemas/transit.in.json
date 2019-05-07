@@ -1,0 +1,25 @@
+{
+    "type": "object",
+    "properties": {
+        "from": {
+            "required": true,
+            "type": "string"
+        },
+        "to": {
+            "required": true,
+            "type": "string"
+        },
+        "fromType": {
+            "required": false,
+            "type": "string"
+        },
+        "toType": {
+            "required": false,
+            "type": "string"
+        },
+        "uniques": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
